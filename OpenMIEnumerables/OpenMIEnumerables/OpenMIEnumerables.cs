@@ -75,5 +75,21 @@ namespace OpenMI.Extensions
                 yield return publisher.GetPublishedEventType(i);
             }
         }
+
+        public static IEnumerable<double> GetScalars(this IScalarSet scalarSet)
+        {
+            for (int i = 0; i < scalarSet.Count; i++)
+            {
+                yield return scalarSet.GetScalar(i);
+            }
+        }
+
+        public static IEnumerable<IVector> GetVectors(this IVectorSet vectorSet)
+        {
+            for (int i = 0; i < vectorSet.Count; i++)
+            {
+                yield return vectorSet.GetVector(i);
+            }
+        }
     }
 }
