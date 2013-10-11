@@ -28,5 +28,52 @@ namespace OpenMI.Extensions
                 yield return item.GetDataOperation(i);
             }
         }
+
+        public static IEnumerable<IDataOperation> GetDataOperations(this ILink link)
+        {
+            for (int i = 0; i < link.DataOperationsCount; i++)
+            {
+                yield return link.GetDataOperation(i);
+            }
+        }
+
+        public static IEnumerable<IArgument> GetArguments(this IDataOperation op)
+        {
+            for (int i = 0; i < op.ArgumentCount; i++)
+            {
+                yield return op.GetArgument(i);
+            }
+        }
+
+        /// <summary>
+        /// Get discrete time stamps or time spans for a specific combination of ElementSet and Quantity.
+        /// </summary>
+        /// <param name="discreteTimes"></param>
+        /// <param name="quantity">The quantity.</param>
+        /// <param name="elementSet">The element.</param>
+        /// <returns>Discrete time stamp or time span.</returns>
+        public static IEnumerable<ITime> GetDiscreteTimes(this IDiscreteTimes discreteTimes, IQuantity quantity, IElementSet elementSet)
+        {
+            for (int i = 0; i < discreteTimes.GetDiscreteTimesCount(quantity, elementSet); i++)
+            {
+                yield return discreteTimes.GetDiscreteTime(quantity, elementSet, i);
+            }
+        }
+
+        public static IEnumerable<EventType> GetAcceptedEventTypes(this IListener listener)
+        {
+            for (int i = 0; i < listener.GetAcceptedEventTypeCount(); i++)
+            {
+                yield return listener.GetAcceptedEventType(i);
+            }
+        }
+
+        public static IEnumerable<EventType> GetPublishedEventTypes(this IPublisher publisher)
+        {
+            for (int i = 0; i < publisher.GetPublishedEventTypeCount(); i++)
+            {
+                yield return publisher.GetPublishedEventType(i);
+            }
+        }
     }
 }
